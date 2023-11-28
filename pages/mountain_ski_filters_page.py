@@ -27,11 +27,11 @@ class Mountain_ski_filters_page(Base):
     f_price_from = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[1]/div/input'
     f_price_to = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[3]/div/input'
     brand_button = '//*[@id="filter_form"]/div[1]/div[3]/div[4]/h4'
-    f_brand = '//*[text()[contains(.,"эксперт")]]'
+    f_brand = '//label[text()[contains(.,"Rossignol")]]'
     age_button = '//*[@id="filter_form"]/div[1]/div[3]/div[6]/h4'
-    f_age = '//label[@for="target1070483"]'
+    f_age = '//label[text()[contains(.,"для взрослых")]]'
     level_button = '//*[@id="filter_form"]/div[1]/div[3]/div[9]/h4'
-    f_level = '//label[@for="param1643723_val1644236_4"]'
+    f_level = '//label[text()[contains(.,"эксперт")]]'
     show_button = '//*[@id="filter_form"]/div[1]/div[3]/div[12]/div/input'
 
     # Getters
@@ -109,20 +109,14 @@ class Mountain_ski_filters_page(Base):
         self.get_current_url()
         self.input_price_from("70000")
         self.input_price_to("80000")
-        time.sleep(1)
         self.click_brand_button()
-        time.sleep(1)
         self.select_brand()
-        time.sleep(1)
         self.click_age_button()
-        time.sleep(1)
         self.select_age()
-        time.sleep(1)
         self.click_level_button()
-        time.sleep(1)
         self.select_level()
-        time.sleep(1)
         self.driver.execute_script('window.scrollTo(0,600)')
+        time.sleep(1)
         self.click_show_button()
 
 

@@ -25,7 +25,7 @@ class Delivery_page(Base):
     telephone_field = '//*[@id="for_delivery2"]/table/tbody/tr[15]/td[2]/div/input'
     disc_card_field = '//*[@id="for_delivery2"]/table/tbody/tr[17]/td[2]/div/input'
     comment_field = '//*[@id="for_delivery2"]/table/tbody/tr[19]/td[2]/div/textarea'
-    operator_call_checkbox = '//*[@id="need_call2"]'
+    operator_call_checkbox = '//label[text()[contains(.,"Нет")]]'
     continue_button = '//*[@id="frm"]/div/div/table[2]/tbody/tr/td[3]/div/div/input'
 
 
@@ -130,7 +130,7 @@ class Delivery_page(Base):
         self.input_frame_field("1")
         self.input_apartment_field("100")
         self.input_fullname_field("Иванов Иван Иванович")
-        self.input_telephone_field("9"*8)
+        self.input_telephone_field("+7 (456) 456-45-66")
         self.input_disc_card_field("12345678")
         self.input_comment_field("test")
         self.click_operator_call_checkbox()
