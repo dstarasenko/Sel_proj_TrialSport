@@ -16,7 +16,7 @@ from base.base_class import Base
 """
 
 
-class Mountain_ski_page(Base):
+class Mountain_ski_filters_page(Base):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -27,12 +27,12 @@ class Mountain_ski_page(Base):
     f_price_from = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[1]/div/input'
     f_price_to = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[3]/div/input'
     brand_button = '//*[@id="filter_form"]/div[1]/div[3]/div[4]/h4'
-    f_brand = '//*[@id="filter_form"]/div[1]/div[3]/div[4]/div[5]/label'
+    f_brand = '//*[text()[contains(.,"эксперт")]]'
     age_button = '//*[@id="filter_form"]/div[1]/div[3]/div[6]/h4'
-    f_age = '//*[@id="filter_form"]/div[1]/div[3]/div[6]/div[1]/label'
+    f_age = '//label[@for="target1070483"]'
     level_button = '//*[@id="filter_form"]/div[1]/div[3]/div[9]/h4'
-    f_level = '//*[@id="filter_form"]/div[1]/div[3]/div[9]/div[3]/label'
-    #reset_button = '//*[@id="filter_form"]/div[1]/div[3]/div[13]/div/input'
+    f_level = '//label[@for="param1643723_val1644236_4"]'
+    show_button = '//*[@id="filter_form"]/div[1]/div[3]/div[12]/div/input'
 
     # Getters
 
@@ -59,6 +59,9 @@ class Mountain_ski_page(Base):
 
     def get_f_level(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.f_level)))
+
+    def get_show_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.show_button)))
 
 
     # Actions
@@ -95,19 +98,32 @@ class Mountain_ski_page(Base):
         self.get_f_level().click()
         print(f"Select level expert")
 
+    def click_show_button(self):
+        self.get_show_button().click()
+        print(f"Click show button")
+
 
     # Methods
 
     def mountain_ski_filters(self):
+        self.get_current_url()
         self.input_price_from("70000")
         self.input_price_to("80000")
+        time.sleep(1)
         self.click_brand_button()
+        time.sleep(1)
         self.select_brand()
+        time.sleep(1)
         self.click_age_button()
+        time.sleep(1)
         self.select_age()
+        time.sleep(1)
         self.click_level_button()
+        time.sleep(1)
         self.select_level()
+        time.sleep(1)
         self.driver.execute_script('window.scrollTo(0,600)')
+        self.click_show_button()
 
 
 
