@@ -14,21 +14,21 @@ from base.base_class import Base
 
 class Main_page(Base):
 
-    main_url = "https://trial-sport.ru/"
+    main_url = "https://trial-sport.ru/" # Главная страница магазина
 
 
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
 
-    # Locators
+    # Локаторы
 
-    profile_button = "//*[@id='asc']/div[1]/div/div[2]/div/span/span"
-    user_name = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[1]/td[2]/div/input"
-    password = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]/div/input"
-    login_button = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[5]/td[2]/div/div/input"
+    profile_button = "//*[@id='asc']/div[1]/div/div[2]/div/span/span" # Кнопка профиля
+    user_name = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[1]/td[2]/div/input" # Поле ввода логина
+    password = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[3]/td[2]/div/input" # Поле ввода пароля
+    login_button = "//*[@id='idLogForm']/table/tbody/tr/td[1]/table/tbody/tr[5]/td[2]/div/div/input" # Кнопка логина в профиль
 
-    #Getters
+    # Геттеры
 
     def get_profile_button(self):
         return WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, self.profile_button)))
@@ -43,7 +43,7 @@ class Main_page(Base):
         return WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, self.login_button)))
 
 
-    # Actions
+    # Действия
 
     def click_profile_button(self):
         self.get_profile_button().click()
@@ -62,7 +62,7 @@ class Main_page(Base):
         print("Click login button")
 
 
-    #Methods
+    # Методы
 
     def authorization(self):
         self.driver.get(self.main_url)

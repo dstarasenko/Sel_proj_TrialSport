@@ -6,6 +6,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 
 from base.base_class import Base
+"""
+    Страница заполнения данных получателя заказа
+"""
 
 class Delivery_page(Base):
 
@@ -13,23 +16,23 @@ class Delivery_page(Base):
         super().__init__(driver)
         self.driver = driver
 
-    # Locators
+    # Локаторы
 
-    pvz_checkbox = '//*[@id="frm"]/div/div/div[2]/div[2]/label'
-    index_field = '//*[@id="for_delivery2"]/table/tbody/tr[3]/td[2]/div/input'
-    street_field = '//*[@id="for_delivery2"]/table/tbody/tr[5]/td[2]/div/input'
-    house_field = '//*[@id="for_delivery2"]/table/tbody/tr[7]/td[2]/div/input'
-    frame_field = '//*[@id="for_delivery2"]/table/tbody/tr[9]/td[2]/div/input'
-    apartment_field = '//*[@id="for_delivery2"]/table/tbody/tr[11]/td[2]/div/input'
-    fullname_field = '//*[@id="for_delivery2"]/table/tbody/tr[13]/td[2]/div/input'
-    telephone_field = '//*[@id="for_delivery2"]/table/tbody/tr[15]/td[2]/div/input'
-    disc_card_field = '//*[@id="for_delivery2"]/table/tbody/tr[17]/td[2]/div/input'
-    comment_field = '//*[@id="for_delivery2"]/table/tbody/tr[19]/td[2]/div/textarea'
-    operator_call_checkbox = '//label[text()[contains(.,"Нет")]]'
-    continue_button = '//*[@id="frm"]/div/div/table[2]/tbody/tr/td[3]/div/div/input'
+    pvz_checkbox = '//*[@id="frm"]/div/div/div[2]/div[2]/label' # Чекбокс выбора способа доставки
+    index_field = '//*[@id="for_delivery2"]/table/tbody/tr[3]/td[2]/div/input' # Поле ввода индекса
+    street_field = '//*[@id="for_delivery2"]/table/tbody/tr[5]/td[2]/div/input' # Поле ввода улицы
+    house_field = '//*[@id="for_delivery2"]/table/tbody/tr[7]/td[2]/div/input' # Поле ввода номера дома
+    frame_field = '//*[@id="for_delivery2"]/table/tbody/tr[9]/td[2]/div/input' # Поле ввода номера корпуса
+    apartment_field = '//*[@id="for_delivery2"]/table/tbody/tr[11]/td[2]/div/input' # Поле ввода номера квартиры
+    fullname_field = '//*[@id="for_delivery2"]/table/tbody/tr[13]/td[2]/div/input' # Поле ввода ФИО получателя
+    telephone_field = '//*[@id="for_delivery2"]/table/tbody/tr[15]/td[2]/div/input' # Поле ввода номера телефона
+    disc_card_field = '//*[@id="for_delivery2"]/table/tbody/tr[17]/td[2]/div/input' # Поле ввода номера дисконтной карты
+    comment_field = '//*[@id="for_delivery2"]/table/tbody/tr[19]/td[2]/div/textarea' # Поле ввода комментария
+    operator_call_checkbox = '//label[text()[contains(.,"Нет")]]' # Чекбокс необходимости звонка оператора (Ставим НЕТ)
+    continue_button = '//*[@id="frm"]/div/div/table[2]/tbody/tr/td[3]/div/div/input' # Кнопка продолжить
 
 
-    # Getters
+    # Геттеры
 
     def get_pvz_checkbox(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.pvz_checkbox)))
@@ -68,7 +71,7 @@ class Delivery_page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.continue_button)))
 
 
-    # Actions
+    # Действия
 
     def click_pvz_checkbox(self):
         self.get_pvz_checkbox().click()
@@ -119,11 +122,11 @@ class Delivery_page(Base):
         print(f"Click continue button")
 
 
-    # Methods
+    # Методы
 
     def entering_delivery_data(self):
         self.get_current_url()
-        #self.click_pvz_checkbox()
+        #self.click_pvz_checkbox() # Отключил, т.к. нужный чекбокс выбран по-умолчанию.
         self.input_index_field("634003")
         self.input_street_field("Мичурина")
         self.input_house_field("2")

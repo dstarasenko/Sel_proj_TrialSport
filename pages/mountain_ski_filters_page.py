@@ -8,11 +8,8 @@ from selenium.webdriver.common.by import By
 from base.base_class import Base
 
 """ 
-    Главная страница магазина Trial Sport.
-    На этой же странице происходит логин в учетку
-    через всплывающее окно.
-    Логин - 89131012503
-    Пароль - dst_testqa
+    Страница каталога горных лыж.
+    Настраиваем фильтры.
 """
 
 
@@ -22,19 +19,19 @@ class Mountain_ski_filters_page(Base):
         super().__init__(driver)
         self.driver = driver
 
-    # Locators
+    # Локаторы
 
-    f_price_from = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[1]/div/input'
-    f_price_to = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[3]/div/input'
-    brand_button = '//*[@id="filter_form"]/div[1]/div[3]/div[4]/h4'
-    f_brand = '//label[text()[contains(.,"Rossignol")]]'
-    age_button = '//*[@id="filter_form"]/div[1]/div[3]/div[6]/h4'
-    f_age = '//label[text()[contains(.,"для взрослых")]]'
-    level_button = '//*[@id="filter_form"]/div[1]/div[3]/div[9]/h4'
-    f_level = '//label[text()[contains(.,"эксперт")]]'
+    f_price_from = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[1]/div/input' # Поле ввода нижнего порога стоимости
+    f_price_to = '//*[@id="filter_form"]/div[1]/div[3]/div[2]/div/table/tbody/tr/td[3]/div/input' # Поле ввода верхнего порога стоимости
+    brand_button = '//*[@id="filter_form"]/div[1]/div[3]/div[4]/h4' # Кнопка раскрытия выпадающего списка с брендами
+    f_brand = '//label[text()[contains(.,"Rossignol")]]'    # Локатор бренда Rossignol, через поиск по наименованию
+    age_button = '//*[@id="filter_form"]/div[1]/div[3]/div[6]/h4' # Кнопка раскрытия выпадающего списка с возрастом
+    f_age = '//label[text()[contains(.,"для взрослых")]]'   # Локатор пункта фильтра "для взрослых", через поиск по тексту
+    level_button = '//*[@id="filter_form"]/div[1]/div[3]/div[9]/h4' # Кнопка раскрытия выпадающего списка с уровнем подготовки
+    f_level = '//label[text()[contains(.,"эксперт")]]'  # Локатор пункта фильтра "эксперт", через поиск по тексту
     show_button = '//*[@id="filter_form"]/div[1]/div[3]/div[12]/div/input'
 
-    # Getters
+    # Геттеры
 
     def get_f_price_from(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.f_price_from)))
@@ -64,7 +61,7 @@ class Mountain_ski_filters_page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.show_button)))
 
 
-    # Actions
+    # Действия
 
     def input_price_from(self, price_from):
         self.get_f_price_from().send_keys(price_from)
@@ -103,7 +100,7 @@ class Mountain_ski_filters_page(Base):
         print(f"Click show button")
 
 
-    # Methods
+    # Методы
 
     def mountain_ski_filters(self):
         self.get_current_url()
@@ -115,7 +112,7 @@ class Mountain_ski_filters_page(Base):
         self.select_age()
         self.click_level_button()
         self.select_level()
-        self.driver.execute_script('window.scrollTo(0,600)')
+        self.driver.execute_script('window.scrollTo(0,600)') # Скролл, чтобы увидеть настроенные фильтры
         time.sleep(1)
         self.click_show_button()
 

@@ -20,9 +20,10 @@ class Base():
 
 
     """ Создание скриншота """
-    def get_screenshot(self):
+    def get_screenshot(self, screen_name):
         now_date = datetime.datetime.now(datetime.UTC).strftime("%Y.%m.%d.%H.%M.%S")
-        self.driver.save_screenshot(f"C:\\Users\\dstar\\PycharmProjects\\main_project\\screen\\finish_{now_date}.png")
+        #self.driver.save_screenshot(f"C:\\Users\\dstar\\PycharmProjects\\Sel_proj_TrialSport\\screenshots\\{screen_name}_{now_date}.png")
+        self.driver.save_screenshot(f"screenshots\\{screen_name}_{now_date}.png")
 
 
     """ Метод проверки URL """
